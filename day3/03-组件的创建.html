@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- <div class="header"></div> -->
+        <Vheader></Vheader>
+        <Vheader></Vheader>
+        <Vheader></Vheader> 
+    </div>
+    <script src="js/vue.js"></script>
+    <script type="text/javascript">
+        //组件的创建
+        Vue.component('Vheader',{
+            //一定是函数，必须要有返回值
+            data:function(){
+                return{
+                    //必须要return，哪怕是空对象
+                }
+            },
+            template:`<div class="header">
+                            <div class="w">
+                                <div class="w-l">
+                                    <img src="images/01.jpg">
+                                </div>
+                                <div class="w-r">
+                                    <button>登录</button>
+                                    <button>注册</button>
+                                </div>
+                            </div>
+                      </div>`
+        })
+
+
+        var app = new Vue({
+            el:"#app",
+            data:{
+
+            },
+            methods:{
+
+            },
+            computed:{
+
+            },
+            created:{
+
+            },
+
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form id="computed" @submit.prevent>
+        <input type="text" v-model.lazy='msg'>
+        <input type="number" v-model.number='msg'>
+        <input type="submit" name="" value="提交">
+        <!-- <input type="text" v-bind:value='getValue' @input='msgChange'> -->
+        <h3>{{msg}}</h3>
+    </form>
+
+    <script src="js/vue.js"></script>
+    <script type="text/javascript">
+        var com = new Vue({
+            el:"#computed",
+            data:{
+                msg:'1234',
+            },
+            methods:{
+                msgChange(e){
+                    console.log(e.target.value);
+                    this.getValue = e.target.value;
+                }
+            },
+            computed:{
+                getValue:{
+                    set:function(newValue){
+                        this.msg = newValue;
+                    },
+                    get:function(){
+                        return this.msg
+                    },
+                }
+            }
+        })
+    </script>
+</body>
+</html>

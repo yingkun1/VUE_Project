@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        // var f = function(a){
+        //     return a;
+        // }
+        // console.log(f(1));
+
+        //箭头函数
+        // var f = (a) => a;
+        //function(){}  ===  (参数)=>{返回值  }
+
+        //字面量方式创建对象
+        var person1  = {
+            name:'日天',
+            age:30,
+            fav:function(){
+                //这个this是使用时定义的对象
+                console.log(arguments)
+                // console.log('喜欢av1');
+                console.log(this.name);
+            }
+        }
+        person1.fav(1,2,3)
+
+        var person2  = {
+            name:'日天',
+            age:30,
+            // fav:() => console.log('喜欢av2')
+            fav:() => {
+                //这个this是定义时所使用的对象
+                console.log(this);
+                console.log(this.name);
+                } 
+        }
+
+        person2.fav()
+
+        var person3  = {
+            name:'日天',
+            age:30,
+            // fav:() => console.log('喜欢av2')
+            fav:() => {
+                //arguments不能使用
+                console.log(arguments);
+                console.log(this.name);
+                } 
+        }
+
+        person3.fav(2,3,4)
+    </script>
+</body>
+</html>

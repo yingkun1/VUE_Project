@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+
+        .box2{
+            background: green;
+        }
+        
+        ul{
+            list-style: none;
+        }
+
+        ul{
+            width: 180px;
+            overflow: hidden;
+            list-style: none;
+        }
+
+         ul li {
+            float: left;
+            width: 30px;
+            height: 30px;
+            background: purple;
+            margin-left: 10px;
+            line-height: 30px;
+            text-align: center;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 插值语法 -->
+        <h3>{{1>2?"1":"2"}}</h3>
+        <div v-if = 'show'>哈哈哈</div>
+        <!-- <button v-on:click = "clickHandler">切换</button> -->
+        <!-- 简便写法 -->
+        <button @click = "clickHandler">切换</button>
+
+        <div v-if="Math.random() > 0.5">
+            Now you see me
+        </div>
+        <div v-else>
+            Now you don't
+        </div>
+
+        <h3 v-show="isShow" v-bind:title='title'>我是一个三级标题</h3>
+
+        <img v-bind:src="imgSrc" :alt="time">
+
+        <div class="box" v-bind:class='{box2:isGreen}'></div>
+
+        <button @click="changeColor">切换颜色</button>
+
+        <button v-on:click = 'count+=1'>加{{count}}</button>
+
+        <div class="lunbo">
+            <img :src="currentSrc" @mouseenter='closeTimer' @mouseleave='openTimer' alt="">
+            <ul>
+                <li v-for = "(item,index) in imgArr" @click='currentHandler(item)'>{{index+1}}</li>
+            </ul>
+            <!-- <div>{{str}}</div> -->
+            <div v-html="str"></div>
+        </div>
+
+        <button @click="preImg">上一张</button>
+        <button @click='nextImg'>下一张</button>
+    </div>
+    <script src="js/vue.js"></script>
+    <script type="text/javascript">
+        //Vue的指令系统
+
+        //Vue核心思想：数据驱动视图，双向的数据绑定
+
+        //Vue实例化对象
+        var app = new Vue({
+            el:"#app",
+            data:{
+                msg:"今天学习Vue",
+                msg2:"今天学习Vue2",
+                show:false,
+                // show:true,
+                isShow:true,
+                title:"哈哈哈2",
+                imgSrc:'./images/girl.jpg',
+                time:`页面加载于${new Date().toLocaleString()}`,
+                isGreen:false,
+                count:0, 
+                imgArr:[
+                    {id:1,src:'images/01.jpg'},
+                    {id:2,src:'images/02.jpg'},
+                    {id:3,src:'images/03.jpg'},
+                ],
+                currentSrc:'images/01.jpg',
+                currentIndex:0,
+                timer:null,
+                str:"<p>嘿嘿嘿</p>"
+            },
+            created(){
+                console.log(111);
+                this.timer = setInterval(this.nextImg,2000);
+            },
+
+            methods:{
+                clickHandler(){
+                    this.show = !this.show;
+                },
+                changeColor(){
+                    this.isGreen = !this.isGreen;
+                },
+                currentHandler(item){
+                    this.currentSrc = item.src;
+                },
+                preImg(){
+                    if(this.currentIndex==0){
+                        this.currentIndex = this.imgArr.length;
+                    }
+                    this.currentIndex --;
+                    this.currentSrc = this.imgArr[this.currentIndex].src;
+                },
+                nextImg(){
+                    if(this.currentIndex==this.imgArr.length-1){
+                        this.currentIndex = -1;
+                    }
+                    this.currentIndex ++ ;
+                    this.currentSrc = this.imgArr[this.currentIndex].src;
+                },
+                closeTimer(){
+                    console.log('sdasdasd');
+                    clearInterval(this.timer);
+                },
+                openTimer(){
+                    console.log(222);
+                    this.timer = setInterval(this.nextImg,2000);
+                }
+            }
+        })
+        console.log(app.$data.msg);
+        console.log(app.msg2);
+    </script>
+</body>
+</html>

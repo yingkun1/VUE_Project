@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        *{
+            padding: 0;
+        }
+        li{
+            border-bottom: 1px solid gray;
+        }
+    </style>
+</head>
+<body>
+    <div id="music">
+        <audio :src="currSong" autoplay="" controls="" @ended='nextSong'></audio>
+        <ul>
+            <li v-for="(item,index) in songs" @click="clickHandler(index)">
+                <h3>歌名:{{item.name}}</h3>
+                <p>歌手:{{item.author}}</p>
+            </li>
+        </ul>
+
+        <button @click="addOneSong">添加一首歌</button>
+    </div>
+    
+    <script type="text/javascript" src="js/vue.js"></script>
+    <script type="text/javascript">
+        var songs = [
+            {id:1,src:'audios/01.mp3',name:"la la Land",author:"Ryan"},
+            {id:2,src:'audios/02.mp3',name:"The Best of",author:"Skillof"},
+            {id:3,src:'audios/02.mp3',name:"The Best one",author:"Skill"},
+        ]
+        var music = new Vue({
+            el:"#music",
+            data:{
+                songs:songs,
+                currentIndex:0,
+            },
+            methods:{
+                clickHandler(index){
+                    // this.currentSong = this.songs[index].src;
+                    this.currentIndex = this.index
+                },
+                nextSong(){
+                    console.log(111)
+                    // this.currentSong = this.songs[index+1].src;
+                    if (this.currentIndex>this.songs.length-1){
+                        this.currentIndex=-1;
+                    }
+                    this.currentIndex++;
+                    // this.currentSong = this.songs[this.currentIndex].src;
+                },
+                addOneSong(){
+                    this.songs.push({id:3,src:'audios/02.mp3',name:"The Best one",author:"Skill"})
+                }
+            },
+            computed:{
+                currSong(){
+                    return this.songs[this.currentIndex].src;
+                }
+            },
+            created(){
+                //通常都来做页面的初始化
+            }
+         })
+    </script>
+</body>
+</html>
